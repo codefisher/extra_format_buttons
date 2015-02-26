@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+<Description about="urn:mozilla:install-manifest">
+<em:id>extra.format.buttons@codefisher.org</em:id>
+<em:name>Extra Format Buttons</em:name>
+<em:version>1.2</em:version>
+<em:description>Adds a font size (in pixels), strikethough, subscript and superscript buttons to Thunderbird's Compose Window.</em:description>
+<em:creator>Michael Buckley</em:creator>
+<em:iconURL>chrome://font-size/skin/icon.png</em:iconURL>
+<em:homepageURL>http://codefisher.org/projects/extra_format_buttons</em:homepageURL>
+
+<!-- Thunderbird -->
+<em:targetApplication>
+ <Description>
+	<em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+	<em:minVersion>1.5</em:minVersion>
+	<em:maxVersion>35.0</em:maxVersion>
+ </Description>
+</em:targetApplication>
+
+<!-- Postbox -->
+<em:targetApplication>
+ <Description>
+	<em:id>postbox@postbox-inc.com</em:id>
+	<em:minVersion>1.0.0</em:minVersion>
+	<em:maxVersion>3.0.*</em:maxVersion>
+ </Description>
+</em:targetApplication>
+
+</Description>
+</RDF>

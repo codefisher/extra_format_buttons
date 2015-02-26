@@ -1,0 +1,23 @@
+#strikethroughButton {
+ list-style-image:url(text-strikethrough.png) !important;
+}
+
+#strikethroughButton[disabled="true"] {
+ list-style-image:url(text-strikethrough-disabled.png) !important;
+}
+
+#subscriptButton {
+ list-style-image:url(text-subscript.png) !important;
+}
+
+#subscriptButton[disabled="true"] {
+ list-style-image:url(text-subscript-disabled.png) !important;
+}
+
+#superscriptButton {
+ list-style-image:url(text-superscript.png) !important;
+}
+
+#superscriptButton[disabled="true"] {
+ list-style-image:url(text-superscript-disabled.png) !important;
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://font-size/skin/style.css" type="text/css"?>
+<!DOCTYPE overlay SYSTEM "chrome://font-size/locale/compose.dtd">
+<overlay id="font-size" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<script type="text/javascript" src="overlay.js" />
+
+<toolbar id="FormatToolbar">
+	<menulist insertafter="font-face-select-container" editable="true" id="FontSize"
+		tooltiptext="&font.size.tooltip;" onchange="composeExtraFormat.SetTextSize(this.value, true);" oninput="composeExtraFormat.SetTextSize(this.value, true);" class="toolbar-focustarget" observes="cmd_renderedHTMLEnabler">
+		<menupopup onclick="composeExtraFormat.SetTextSize(event.target.value, true);">
+			<menuitem label="8" value="8" />
+			<menuitem label="9" value="9" />
+			<menuitem label="10" value="10" />
+			<menuitem label="11" value="11" />
+			<menuitem label="12" value="12" />
+			<menuitem label="14" value="14" />
+			<menuitem label="16" value="16" />
+			<menuitem label="18" value="18" />
+			<menuitem label="20" value="20" />
+			<menuitem label="22" value="22" />
+			<menuitem label="24" value="24" />
+			<menuitem label="26" value="26" />
+			<menuitem label="28" value="28" />
+			<menuitem label="30" value="30" />
+			<menuitem label="32" value="32" />
+			<menuitem label="36" value="36" />
+			<menuitem label="48" value="48" />
+			<menuitem label="72" value="72" />
+		</menupopup>
+	</menulist>
+
+	<toolbarbutton
+		tooltiptext="&strike.through.tooltip;"
+		id="strikethroughButton"
+		insertafter="underlineButton"
+		observes="cmd_renderedHTMLEnabler"
+		oncommand="doStyleUICommand('cmd_strikethrough');" />
+
+	<toolbarbutton
+		tooltiptext="&sub.script.tooltip;"
+		id="subscriptButton"
+		insertafter="strikethroughButton"
+		observes="cmd_renderedHTMLEnabler"
+		oncommand="doStyleUICommand('cmd_subscript');" />
+
+	<toolbarbutton
+		tooltiptext="&super.script.tooltip;"
+		id="superscriptButton"
+		insertafter="subscriptButton"
+		observes="cmd_renderedHTMLEnabler"
+		oncommand="doStyleUICommand('cmd_superscript');" />
+
+</toolbar>
+</overlay>

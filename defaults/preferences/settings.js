@@ -1,0 +1,1 @@
+pref("extensions.compose.font.size@codefisher.org.description", "chrome/font-size/locale/common.properties");
