@@ -1,6 +1,6 @@
 # Extra Format Buttons
 
-Extra Format Buttons extension for Thunderbird and SeaMonkey, it adds a selection of extra format commands to the format toolbar in the write window.  So far that includes
+Extra Format Buttons extension for Thunderbird and SeaMonkey, it adds a selection of extra format commands to the format toolbar in the write window.  So far that includes:
 
 * Font Size (in pixels)
 * Sub Script
@@ -8,8 +8,8 @@ Extra Format Buttons extension for Thunderbird and SeaMonkey, it adds a selectio
 * Strike Though
 * Code
 
-The Extra Format Buttons also makes the format toolbar customizable, so that you can easily add or remove those buttons that you want.
-It also adds an extra Toolbar, which is hidden by default, but can made visiable though the right click context menu.
+Extra Format Buttons also makes the format toolbar customizable, so that you can easily add or remove those buttons that you want.
+It also adds an extra toolbar, which is hidden by default, but can made visiable though the right click context menu.
 
 Project Links:
 * <a href="https://codefisher.org/projects/extra_format_buttons/">Homepage</a>
