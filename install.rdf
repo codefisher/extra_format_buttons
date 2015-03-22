@@ -8,7 +8,7 @@
 <em:description>Adds a font size (in pixels), strikethough, subscript and superscript and other buttons to Thunderbird's Compose Window.  It also makes the compose bar customizable.</em:description>
 <em:creator>Michael Buckley</em:creator>
 <em:iconURL>chrome://font-size/skin/icon.png</em:iconURL>
-<em:homepageURL>http://codefisher.org/projects/extra_format_buttons/</em:homepageURL>
+<em:homepageURL>https://codefisher.org/projects/extra_format_buttons/</em:homepageURL>
 
 	<!-- Thunderbird -->
 	<em:targetApplication>
