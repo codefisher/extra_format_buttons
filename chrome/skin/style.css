@@ -1,23 +1,38 @@
-#strikethroughButton {
+#efb-strikethroughButton {
  list-style-image:url(text-strikethrough.png) !important;
 }
 
-#strikethroughButton[disabled="true"] {
+#efb-strikethroughButton[disabled="true"] {
  list-style-image:url(text-strikethrough-disabled.png) !important;
 }
 
-#subscriptButton {
+#efb-subscriptButton {
  list-style-image:url(text-subscript.png) !important;
 }
 
-#subscriptButton[disabled="true"] {
+#efb-subscriptButton[disabled="true"] {
  list-style-image:url(text-subscript-disabled.png) !important;
 }
 
-#superscriptButton {
+#efb-superscriptButton {
  list-style-image:url(text-superscript.png) !important;
 }
 
-#superscriptButton[disabled="true"] {
+#efb-superscriptButton[disabled="true"] {
  list-style-image:url(text-superscript-disabled.png) !important;
+}
+
+#efb-formatcode {
+ list-style-image:url(script.png) !important;
+}
+
+#efb-formatcode[disabled="true"] {
+ list-style-image:url(script-disabled.png) !important;
+}
+
+#efb-extra-format {
+  -moz-appearance: none;
+  color: WindowText;
+  margin-left: 3px;
+  margin-right: 3px;
 }

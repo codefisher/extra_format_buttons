@@ -1,5 +1,5 @@
 content	font-size			chrome/content/
 skin	font-size	classic/1.0	chrome/skin/
 locale	font-size	en-US	chrome/locale/en-US/
-
+style	chrome://global/content/customizeToolbar.xul	chrome://font-size/skin/style.css
 overlay	chrome://messenger/content/messengercompose/messengercompose.xul 	chrome://font-size/content/overlay.xul

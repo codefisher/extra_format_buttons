@@ -4,51 +4,105 @@
 <overlay id="font-size" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 <script type="text/javascript" src="overlay.js" />
 
-<toolbar id="FormatToolbar">
-	<menulist insertafter="font-face-select-container" editable="true" id="FontSize"
-		tooltiptext="&font.size.tooltip;" onchange="composeExtraFormat.SetTextSize(this.value, true);" oninput="composeExtraFormat.SetTextSize(this.value, true);" class="toolbar-focustarget" observes="cmd_renderedHTMLEnabler">
-		<menupopup onclick="composeExtraFormat.SetTextSize(event.target.value, true);">
-			<menuitem label="8" value="8" />
-			<menuitem label="9" value="9" />
-			<menuitem label="10" value="10" />
-			<menuitem label="11" value="11" />
-			<menuitem label="12" value="12" />
-			<menuitem label="14" value="14" />
-			<menuitem label="16" value="16" />
-			<menuitem label="18" value="18" />
-			<menuitem label="20" value="20" />
-			<menuitem label="22" value="22" />
-			<menuitem label="24" value="24" />
-			<menuitem label="26" value="26" />
-			<menuitem label="28" value="28" />
-			<menuitem label="30" value="30" />
-			<menuitem label="32" value="32" />
-			<menuitem label="36" value="36" />
-			<menuitem label="48" value="48" />
-			<menuitem label="72" value="72" />
+<commandset id="composeCommands">
+	<command id="cmd_CustomizeFormatToolbar"
+		oncommand="CustomizeMailToolbar('FormatToolbox', 'toolbar-format-context-menu'); composeExtraFormat.enableMenuBar();"/>
+</commandset>
+
+<hbox id="composeContentBox">
+	<popupset id="composeContentPopupSet">
+		<menupopup id="toolbar-format-context-menu" 
+			onpopupshowing="onViewToolbarsPopupShowing(event, 'FormatToolbox');">
+			<menuseparator/>
+			<menuitem id="CustomizeFormatToolbar" command="cmd_CustomizeFormatToolbar" label="&customize.label;" accesskey="&customize.key;"/>
 		</menupopup>
-	</menulist>
+	</popupset>
+</hbox>
+
+<toolbar id="FormatToolbar" context="toolbar-format-context-menu" mode="icons" iconsize="small" 
+	defaultset="paragraph-select-container,font-face-select-container,efb-FontSize-container,color-buttons-container,separator,boldButton,italicButton,underlineButton,efb-strikethroughButton,efb-subscriptButton,efb-superscriptButton,separator,ulButton,olButton,outdentButton,indentButton,separator,AlignPopupButton,InsertPopupButton,smileButtonMenu"/>
+
+<!-- need to set a removable="true", or these defaults buttons can't be moved or removed -->
+<toolbaritem id="paragraph-select-container" removable="true" />
+<toolbaritem id="font-face-select-container" removable="true" />
+<toolbaritem id="color-buttons-container" removable="true" />
+<toolbaritem id="" removable="true" />
+
+<toolbarbutton id="DecreaseFontSizeButton" removable="true" />
+<toolbarbutton id="IncreaseFontSizeButton" removable="true" />
+<toolbarbutton id="boldButton" removable="true" />
+<toolbarbutton id="italicButton" removable="true" />
+<toolbarbutton id="underlineButton" removable="true" />
+<toolbarbutton id="ulButton" removable="true" />
+<toolbarbutton id="olButton" removable="true" />
+<toolbarbutton id="outdentButton" removable="true" />
+<toolbarbutton id="indentButton" removable="true" />
+<toolbarbutton id="AlignPopupButton" removable="true" />
+<toolbarbutton id="InsertPopupButton" removable="true" />
+<toolbarbutton id="smileButtonMenu" removable="true" />
+
+<toolbox id="FormatToolbox">
+	<toolbarpalette id="FormatToolbarPalette">
+
+	<toolbaritem id="efb-FontSize-container"
+		observes="cmd_renderedHTMLEnabler" class="formatting-button">
+		<menulist editable="true" id="efb-FontSize" observes="cmd_renderedHTMLEnabler"
+			tooltiptext="&font.size.tooltip;" onchange="composeExtraFormat.SetTextSize(this.value, true);" oninput="composeExtraFormat.SetTextSize(this.value, true);" class="toolbar-focustarget">
+			<menupopup onclick="composeExtraFormat.SetTextSize(event.target.value, true);">
+				<menuitem label="8" value="8" />
+				<menuitem label="9" value="9" />
+				<menuitem label="10" value="10" />
+				<menuitem label="11" value="11" />
+				<menuitem label="12" value="12" />
+				<menuitem label="14" value="14" />
+				<menuitem label="16" value="16" />
+				<menuitem label="18" value="18" />
+				<menuitem label="20" value="20" />
+				<menuitem label="22" value="22" />
+				<menuitem label="24" value="24" />
+				<menuitem label="26" value="26" />
+				<menuitem label="28" value="28" />
+				<menuitem label="30" value="30" />
+				<menuitem label="32" value="32" />
+				<menuitem label="36" value="36" />
+				<menuitem label="48" value="48" />
+				<menuitem label="72" value="72" />
+			</menupopup>
+		</menulist>
+	</toolbaritem>
 
 	<toolbarbutton
+		class="formatting-button"
 		tooltiptext="&strike.through.tooltip;"
-		id="strikethroughButton"
-		insertafter="underlineButton"
+		id="efb-strikethroughButton"
 		observes="cmd_renderedHTMLEnabler"
 		oncommand="doStyleUICommand('cmd_strikethrough');" />
 
 	<toolbarbutton
+		class="formatting-button"
 		tooltiptext="&sub.script.tooltip;"
-		id="subscriptButton"
-		insertafter="strikethroughButton"
+		id="efb-subscriptButton"
 		observes="cmd_renderedHTMLEnabler"
 		oncommand="doStyleUICommand('cmd_subscript');" />
 
 	<toolbarbutton
+		class="formatting-button"
 		tooltiptext="&super.script.tooltip;"
-		id="superscriptButton"
-		insertafter="subscriptButton"
+		id="efb-superscriptButton"
 		observes="cmd_renderedHTMLEnabler"
 		oncommand="doStyleUICommand('cmd_superscript');" />
+		
+	<toolbarbutton
+		label="&formatcode.label;"
+		tooltiptext="&formatcode.label;"
+		id="efb-formatcode"
+		observes="cmd_renderedHTMLEnabler"
+		oncommand="doStyleUICommand('cmd_code')" />
+			
+	</toolbarpalette>
+	
+	<toolbar id="efb-extra-format" class="chromeclass-toolbar" mode="icons" iconsize="small" persist="collapsed" collapsed="true"  context="toolbar-format-context-menu" customizable="true" toolbarname="&extra-format-toolbar.label;" defaultset="" >
+	</toolbar>
+</toolbox>
 
-</toolbar>
 </overlay>

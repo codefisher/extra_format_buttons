@@ -5,28 +5,37 @@
 <em:id>extra.format.buttons@codefisher.org</em:id>
 <em:name>Extra Format Buttons</em:name>
 <em:version>1.2</em:version>
-<em:description>Adds a font size (in pixels), strikethough, subscript and superscript buttons to Thunderbird's Compose Window.</em:description>
+<em:description>Adds a font size (in pixels), strikethough, subscript and superscript and other buttons to Thunderbird's Compose Window.  It also makes the compose bar customizable.</em:description>
 <em:creator>Michael Buckley</em:creator>
 <em:iconURL>chrome://font-size/skin/icon.png</em:iconURL>
-<em:homepageURL>http://codefisher.org/projects/extra_format_buttons</em:homepageURL>
+<em:homepageURL>http://codefisher.org/projects/extra_format_buttons/</em:homepageURL>
 
-<!-- Thunderbird -->
-<em:targetApplication>
- <Description>
-	<em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
-	<em:minVersion>1.5</em:minVersion>
-	<em:maxVersion>35.0</em:maxVersion>
- </Description>
-</em:targetApplication>
+	<!-- Thunderbird -->
+	<em:targetApplication>
+		<Description>
+			<em:id>{3550f703-e582-4d05-9a08-453d09bdfdc6}</em:id>
+			<em:minVersion>1.5</em:minVersion>
+			<em:maxVersion>35.0</em:maxVersion>
+		</Description>
+	</em:targetApplication>
 
-<!-- Postbox -->
-<em:targetApplication>
- <Description>
-	<em:id>postbox@postbox-inc.com</em:id>
-	<em:minVersion>1.0.0</em:minVersion>
-	<em:maxVersion>3.0.*</em:maxVersion>
- </Description>
-</em:targetApplication>
+	<!-- Postbox -->
+	<em:targetApplication>
+		<Description>
+			<em:id>postbox@postbox-inc.com</em:id>
+			<em:minVersion>1.0.0</em:minVersion>
+			<em:maxVersion>3.0.*</em:maxVersion>
+		</Description>
+	</em:targetApplication>
+
+	<!--SeaMonkey-->
+	<em:targetApplication>
+		<Description>
+			<em:id>{92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a}</em:id>
+			<em:minVersion>2.0</em:minVersion>
+			<em:maxVersion>2.36</em:maxVersion>
+		</Description>
+	</em:targetApplication>
 
 </Description>
 </RDF>

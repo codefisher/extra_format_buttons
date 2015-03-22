@@ -20,9 +20,9 @@ var composeExtraFormat = {
 		try {
 			composeExtraFormat.setTextSizeList(size);
 		} catch(e) {}
-		var subButton = document.getElementById('subscriptButton');
-		var superButton = document.getElementById('superscriptButton');
-		var strikeButton = document.getElementById('strikethroughButton');
+		var subButton = document.getElementById('efb-subscriptButton');
+		var superButton = document.getElementById('efb-superscriptButton');
+		var strikeButton = document.getElementById('efb-strikethroughButton');
 		if(style.verticalAlign == 'sub') {
 			subButton.setAttribute('state','true');
 			subButton.setAttribute('checked','true');
@@ -55,7 +55,11 @@ var composeExtraFormat = {
 			node = selection.anchorNode;
 		}
 		if(!node) {
-			node = editor.contentDocument.body;
+			if(editor.contentDocument.body) {
+				node = editor.contentDocument.body;
+			} else {
+				return null;
+			}
 		}
 		if(node.nodeName == '#text'){
 			node = node.parentNode;
@@ -64,7 +68,7 @@ var composeExtraFormat = {
 	},
 
 	setTextSizeList: function(size){
-		sizeBox = document.getElementById('FontSize');
+		sizeBox = document.getElementById('efb-FontSize');
 		if(!sizeBox) {
 			return;
 		}
@@ -95,6 +99,12 @@ var composeExtraFormat = {
 			}
 		} catch(e) {}
 		composeExtraFormat.setTextSizeList(value);
+	},
+	
+	enableMenuBar: function() {
+		var menubar = document.getElementById("mail-menubar");
+		for (var i = 0; i < menubar.childNodes.length; ++i)
+			menubar.childNodes[i].setAttribute("disabled", false);
 	}
 }
 
