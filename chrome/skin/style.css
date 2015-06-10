@@ -10,6 +10,10 @@
  list-style-image:url(text-subscript.png) !important;
 }
 
+#efb-rewrap-text {
+ list-style-image:url(text-wrap.png) !important;
+}
+
 #efb-subscriptButton[disabled="true"] {
  list-style-image:url(text-subscript-disabled.png) !important;
 }
@@ -28,6 +32,10 @@
 
 #efb-formatcode[disabled="true"] {
  list-style-image:url(script-disabled.png) !important;
+}
+
+#efb-rewrap-text[disabled="true"] {
+ list-style-image:url(text-wrap-disabled.png) !important;
 }
 
 #efb-extra-format {

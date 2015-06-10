@@ -3,8 +3,11 @@
 <!ENTITY sub.script.tooltip "Subscript">
 <!ENTITY super.script.tooltip "Superscript">
 
+<!ENTITY super.script.tooltip "Superscript">
+
 <!ENTITY customize.label "Customize…">
 <!ENTITY customize.key "C">
 <!ENTITY extra-format-toolbar.label "Extra Format">
 
 <!ENTITY formatcode.label "Format Code">
+<!ENTITY rewrap-text.label "Rewrap">

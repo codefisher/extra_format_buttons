@@ -98,6 +98,13 @@
 		id="efb-formatcode"
 		observes="cmd_renderedHTMLEnabler"
 		oncommand="doStyleUICommand('cmd_code')" />
+
+	<toolbarbutton
+		label="&rewrap-text.label;"
+		tooltiptext="&rewrap-text.label;"
+		id="efb-rewrap-text"
+		observes="cmd_renderedHTMLEnabler"
+		command="cmd_rewrap" />
 			
 	</toolbarpalette>
 	
