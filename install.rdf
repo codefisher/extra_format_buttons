@@ -4,7 +4,7 @@
 <Description about="urn:mozilla:install-manifest">
 <em:id>extra.format.buttons@codefisher.org</em:id>
 <em:name>Extra Format Buttons</em:name>
-<em:version>1.2</em:version>
+<em:version>1.3</em:version>
 <em:description>Adds a font size (in pixels), strikethough, subscript and superscript and other buttons to Thunderbird's Compose Window.  It also makes the compose bar customizable.</em:description>
 <em:creator>Michael Buckley</em:creator>
 <em:iconURL>chrome://font-size/skin/icon.png</em:iconURL>

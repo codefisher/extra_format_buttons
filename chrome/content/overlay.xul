@@ -1,115 +1,270 @@
 <?xml version="1.0"?>
 <?xml-stylesheet href="chrome://font-size/skin/style.css" type="text/css"?>
-<!DOCTYPE overlay SYSTEM "chrome://font-size/locale/compose.dtd">
-<overlay id="font-size" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
-<script type="text/javascript" src="overlay.js" />
+<!DOCTYPE overlay [
+		<!ENTITY % editorOverlayDTD SYSTEM "chrome://editor/locale/editorOverlay.dtd">
+			%editorOverlayDTD;
+		<!ENTITY % extraButtonDTD SYSTEM "chrome://font-size/locale/compose.dtd">
+			%extraButtonDTD; ]>
+<overlay id="font-size"
+		 xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script type="text/javascript" src="overlay.js"/>
 
-<commandset id="composeCommands">
-	<command id="cmd_CustomizeFormatToolbar"
-		oncommand="CustomizeMailToolbar('FormatToolbox', 'toolbar-format-context-menu'); composeExtraFormat.enableMenuBar();"/>
-</commandset>
+	<commandset id="composeCommands">
+		<command id="cmd_CustomizeFormatToolbar"
+				 oncommand="CustomizeMailToolbar('FormatToolbox', 'toolbar-format-context-menu'); composeExtraFormat.enableMenuBar();"/>
+	</commandset>
 
-<hbox id="composeContentBox">
-	<popupset id="composeContentPopupSet">
-		<menupopup id="toolbar-format-context-menu" 
-			onpopupshowing="onViewToolbarsPopupShowing(event, 'FormatToolbox');">
-			<menuseparator/>
-			<menuitem id="CustomizeFormatToolbar" command="cmd_CustomizeFormatToolbar" label="&customize.label;" accesskey="&customize.key;"/>
-		</menupopup>
-	</popupset>
-</hbox>
-
-<toolbar id="FormatToolbar" context="toolbar-format-context-menu" mode="icons" iconsize="small" 
-	defaultset="paragraph-select-container,font-face-select-container,efb-FontSize-container,color-buttons-container,separator,boldButton,italicButton,underlineButton,efb-strikethroughButton,efb-subscriptButton,efb-superscriptButton,separator,ulButton,olButton,outdentButton,indentButton,separator,AlignPopupButton,InsertPopupButton,smileButtonMenu"/>
-
-<!-- need to set a removable="true", or these defaults buttons can't be moved or removed -->
-<toolbaritem id="paragraph-select-container" removable="true" />
-<toolbaritem id="font-face-select-container" removable="true" />
-<toolbaritem id="color-buttons-container" removable="true" />
-<toolbaritem id="" removable="true" />
-
-<toolbarbutton id="DecreaseFontSizeButton" removable="true" />
-<toolbarbutton id="IncreaseFontSizeButton" removable="true" />
-<toolbarbutton id="boldButton" removable="true" />
-<toolbarbutton id="italicButton" removable="true" />
-<toolbarbutton id="underlineButton" removable="true" />
-<toolbarbutton id="ulButton" removable="true" />
-<toolbarbutton id="olButton" removable="true" />
-<toolbarbutton id="outdentButton" removable="true" />
-<toolbarbutton id="indentButton" removable="true" />
-<toolbarbutton id="AlignPopupButton" removable="true" />
-<toolbarbutton id="InsertPopupButton" removable="true" />
-<toolbarbutton id="smileButtonMenu" removable="true" />
-
-<toolbox id="FormatToolbox">
-	<toolbarpalette id="FormatToolbarPalette">
-
-	<toolbaritem id="efb-FontSize-container"
-		observes="cmd_renderedHTMLEnabler" class="formatting-button">
-		<menulist editable="true" id="efb-FontSize" observes="cmd_renderedHTMLEnabler"
-			tooltiptext="&font.size.tooltip;" onchange="composeExtraFormat.SetTextSize(this.value, true);" oninput="composeExtraFormat.SetTextSize(this.value, true);" class="toolbar-focustarget">
-			<menupopup onclick="composeExtraFormat.SetTextSize(event.target.value, true);">
-				<menuitem label="8" value="8" />
-				<menuitem label="9" value="9" />
-				<menuitem label="10" value="10" />
-				<menuitem label="11" value="11" />
-				<menuitem label="12" value="12" />
-				<menuitem label="14" value="14" />
-				<menuitem label="16" value="16" />
-				<menuitem label="18" value="18" />
-				<menuitem label="20" value="20" />
-				<menuitem label="22" value="22" />
-				<menuitem label="24" value="24" />
-				<menuitem label="26" value="26" />
-				<menuitem label="28" value="28" />
-				<menuitem label="30" value="30" />
-				<menuitem label="32" value="32" />
-				<menuitem label="36" value="36" />
-				<menuitem label="48" value="48" />
-				<menuitem label="72" value="72" />
+	<hbox id="composeContentBox">
+		<popupset id="composeContentPopupSet">
+			<menupopup id="toolbar-format-context-menu"
+					   onpopupshowing="onViewToolbarsPopupShowing(event, 'FormatToolbox');">
+				<menuseparator/>
+				<menuitem id="CustomizeFormatToolbar"
+						  command="cmd_CustomizeFormatToolbar"
+						  label="&customize.label;"
+						  accesskey="&customize.key;"/>
 			</menupopup>
-		</menulist>
-	</toolbaritem>
+		</popupset>
+	</hbox>
 
-	<toolbarbutton
-		class="formatting-button"
-		tooltiptext="&strike.through.tooltip;"
-		id="efb-strikethroughButton"
-		observes="cmd_renderedHTMLEnabler"
-		oncommand="doStyleUICommand('cmd_strikethrough');" />
+	<toolbar id="FormatToolbar" context="toolbar-format-context-menu"
+			 mode="icons" iconsize="small"
+			 defaultset="paragraph-select-container,font-face-select-container,efb-FontSize-container,color-buttons-container,separator,boldButton,italicButton,underlineButton,efb-strikethroughButton,efb-subscriptButton,efb-superscriptButton,separator,ulButton,olButton,outdentButton,indentButton,separator,AlignPopupButton,InsertPopupButton,smileButtonMenu"/>
 
-	<toolbarbutton
-		class="formatting-button"
-		tooltiptext="&sub.script.tooltip;"
-		id="efb-subscriptButton"
-		observes="cmd_renderedHTMLEnabler"
-		oncommand="doStyleUICommand('cmd_subscript');" />
+	<!-- need to set a removable="true", or these defaults buttons can't be moved or removed -->
+	<toolbaritem id="paragraph-select-container" label="&paragraph.label;" removable="true"/>
+	<toolbaritem id="font-face-select-container" label="&font-face.label;" removable="true"/>
+	<toolbaritem id="color-buttons-container" label="&colors.label;" removable="true"/>
 
-	<toolbarbutton
-		class="formatting-button"
-		tooltiptext="&super.script.tooltip;"
-		id="efb-superscriptButton"
-		observes="cmd_renderedHTMLEnabler"
-		oncommand="doStyleUICommand('cmd_superscript');" />
-		
-	<toolbarbutton
-		label="&formatcode.label;"
-		tooltiptext="&formatcode.label;"
-		id="efb-formatcode"
-		observes="cmd_renderedHTMLEnabler"
-		oncommand="doStyleUICommand('cmd_code')" />
+	<toolbarbutton id="DecreaseFontSizeButton" label="&decrease-font-size.label;" removable="true"/>
+	<toolbarbutton id="IncreaseFontSizeButton" label="&increase-font-size.label;" removable="true"/>
+	<toolbarbutton id="boldButton" label="&bold.label;" removable="true"/>
+	<toolbarbutton id="italicButton" label="&italic.label;" removable="true"/>
+	<toolbarbutton id="underlineButton" label="&underline.label;" removable="true"/>
+	<toolbarbutton id="ulButton" label="&ul.label;" removable="true"/>
+	<toolbarbutton id="olButton" label="&ol.label;" removable="true"/>
+	<toolbarbutton id="outdentButton" label="&outdent.label;" removable="true"/>
+	<toolbarbutton id="indentButton" label="&indent.label;" removable="true"/>
+	<toolbarbutton id="AlignPopupButton" label="&align.label;" removable="true"/>
+	<toolbarbutton id="InsertPopupButton" label="&insert.label;" removable="true"/>
+	<toolbarbutton id="smileButtonMenu" label="&smile.label;" removable="true"/>
 
-	<toolbarbutton
-		label="&rewrap-text.label;"
-		tooltiptext="&rewrap-text.label;"
-		id="efb-rewrap-text"
-		observes="cmd_renderedHTMLEnabler"
-		command="cmd_rewrap" />
-			
-	</toolbarpalette>
-	
-	<toolbar id="efb-extra-format" class="chromeclass-toolbar" mode="icons" iconsize="small" persist="collapsed" collapsed="true"  context="toolbar-format-context-menu" customizable="true" toolbarname="&extra-format-toolbar.label;" defaultset="" >
-	</toolbar>
-</toolbox>
+	<toolbox id="FormatToolbox">
+		<toolbarpalette id="FormatToolbarPalette">
+
+			<toolbaritem id="efb-FontSize-container"
+						 label="&font.size.label;"
+						 observes="cmd_renderedHTMLEnabler"
+						 class="formatting-button">
+				<menulist editable="true" id="efb-FontSize"
+						  observes="cmd_renderedHTMLEnabler"
+						  tooltiptext="&font.size.tooltip;"
+						  onchange="composeExtraFormat.SetTextSize(this.value, true);"
+						  oninput="composeExtraFormat.SetTextSize(this.value, true);"
+						  class="toolbar-focustarget">
+					<menupopup
+							onclick="composeExtraFormat.SetTextSize(event.target.value, true);">
+						<menuitem label="8" value="8"/>
+						<menuitem label="9" value="9"/>
+						<menuitem label="10" value="10"/>
+						<menuitem label="11" value="11"/>
+						<menuitem label="12" value="12"/>
+						<menuitem label="14" value="14"/>
+						<menuitem label="16" value="16"/>
+						<menuitem label="18" value="18"/>
+						<menuitem label="20" value="20"/>
+						<menuitem label="22" value="22"/>
+						<menuitem label="24" value="24"/>
+						<menuitem label="26" value="26"/>
+						<menuitem label="28" value="28"/>
+						<menuitem label="30" value="30"/>
+						<menuitem label="32" value="32"/>
+						<menuitem label="36" value="36"/>
+						<menuitem label="48" value="48"/>
+						<menuitem label="72" value="72"/>
+					</menupopup>
+				</menulist>
+			</toolbaritem>
+
+			<toolbarbutton
+					class="formatting-button"
+					tooltiptext="&strike.through.tooltip;"
+					id="efb-strikethroughButton"
+					observes="cmd_renderedHTMLEnabler"
+					oncommand="doStyleUICommand('cmd_strikethrough');"/>
+
+			<toolbarbutton
+					class="formatting-button"
+					tooltiptext="&sub.script.tooltip;"
+					id="efb-subscriptButton"
+					observes="cmd_renderedHTMLEnabler"
+					oncommand="doStyleUICommand('cmd_subscript');"/>
+
+			<toolbarbutton
+					class="formatting-button"
+					tooltiptext="&super.script.tooltip;"
+					id="efb-superscriptButton"
+					observes="cmd_renderedHTMLEnabler"
+					oncommand="doStyleUICommand('cmd_superscript');"/>
+
+			<toolbarbutton
+					label="&formatcode.label;"
+					tooltiptext="&formatcode.label;"
+					id="efb-formatcode"
+					observes="cmd_renderedHTMLEnabler"
+					oncommand="doStyleUICommand('cmd_code')"/>
+
+			<toolbarbutton
+					label="&rewrap-text.label;"
+					tooltiptext="&rewrap-text.label;"
+					id="efb-rewrap-text"
+					observes="cmd_renderedHTMLEnabler"
+					command="cmd_rewrap"/>
+
+			<toolbarbutton
+					label="&justify-text.label;"
+					tooltiptext="&justify-text.tooltip;"
+					id="efb-justify-text"
+					observes="cmd_renderedHTMLEnabler"
+					oncommand="doStatefulCommand('cmd_align', 'justify')"/>
+
+			<toolbarbutton
+					label="&left-align-text.label;"
+					tooltiptext="&left-align-text.tooltip;"
+					id="efb-left-align-text"
+					observes="cmd_renderedHTMLEnabler"
+					oncommand="doStatefulCommand('cmd_align', 'left')"/>
+
+			<toolbarbutton
+					label="&center-align-text.label;"
+					tooltiptext="&center-align-text.tooltip;"
+					id="efb-center-align-text"
+					observes="cmd_renderedHTMLEnabler"
+					oncommand="doStatefulCommand('cmd_align', 'center')"/>
+
+			<toolbarbutton
+					label="&right-align-text.label;"
+					tooltiptext="&right-align-text.tooltip;"
+					id="efb-right-align-text"
+					observes="cmd_renderedHTMLEnabler"
+					oncommand="doStatefulCommand('cmd_align', 'right')"/>
+
+			<toolbaritem id="color-buttons-container-1" label="&colors.label;"
+						 ondblclick="composeExtraFormat.setColorDoubleClick(this, event);"
+						 backgroundcolor="BackgroundColorButton1"
+						 textcolor="TextColorButton1"
+						 class="formatting-button">
+				<stack id="ColorButtons" align="center">
+					<box class="color-button background-color-button" id="BackgroundColorButton1"
+
+						 onclick="composeExtraFormat.setColor(this, event, '');"
+						 tooltiptext="&BackgroundColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+					<box class="color-button text-color-button" id="TextColorButton1"
+						 onclick="composeExtraFormat.setColor(this, event, 'Text');"
+						 tooltiptext="&TextColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+				</stack>
+			</toolbaritem>
+
+			<toolbaritem id="color-buttons-container-2" label="&colors.label;"
+						 ondblclick="composeExtraFormat.setColorDoubleClick(this, event);"
+						 backgroundcolor="BackgroundColorButton2"
+						 textcolor="TextColorButton2"
+						 class="formatting-button">
+				<stack id="ColorButtons" align="center">
+					<box class="color-button background-color-button" id="BackgroundColorButton2"
+
+						 onclick="composeExtraFormat.setColor(this, event, '');"
+						 tooltiptext="&BackgroundColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+					<box class="color-button text-color-button" id="TextColorButton2"
+						 onclick="composeExtraFormat.setColor(this, event, 'Text');"
+						 tooltiptext="&TextColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+				</stack>
+			</toolbaritem>
+
+			<toolbaritem id="color-buttons-container-3" label="&colors.label;"
+						 ondblclick="composeExtraFormat.setColorDoubleClick(this, event);"
+						 backgroundcolor="BackgroundColorButton3"
+						 textcolor="TextColorButton3"
+						 class="formatting-button">
+				<stack id="ColorButtons" align="center">
+					<box class="color-button background-color-button" id="BackgroundColorButton3"
+
+						 onclick="composeExtraFormat.setColor(this, event, '');"
+						 tooltiptext="&BackgroundColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+					<box class="color-button text-color-button" id="TextColorButton3"
+						 onclick="composeExtraFormat.setColor(this, event, 'Text');"
+						 tooltiptext="&TextColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+				</stack>
+			</toolbaritem>
+
+			<toolbaritem id="color-buttons-container-4" label="&colors.label;"
+						 ondblclick="composeExtraFormat.setColorDoubleClick(this, event);"
+						 backgroundcolor="BackgroundColorButton4"
+						 textcolor="TextColorButton4"
+						 class="formatting-button">
+				<stack id="ColorButtons" align="center">
+					<box class="color-button background-color-button" id="BackgroundColorButton4"
+
+						 onclick="composeExtraFormat.setColor(this, event, '');"
+						 tooltiptext="&BackgroundColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+					<box class="color-button text-color-button" id="TextColorButton4"
+						 onclick="composeExtraFormat.setColor(this, event, 'Text');"
+						 tooltiptext="&TextColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+				</stack>
+			</toolbaritem>
+
+			<toolbaritem id="color-buttons-container-5" label="&colors.label;"
+						 ondblclick="composeExtraFormat.setColorDoubleClick(this, event);"
+						 backgroundcolor="BackgroundColorButton5"
+						 textcolor="TextColorButton5"
+						 class="formatting-button">
+				<stack id="ColorButtons" align="center">
+					<box class="color-button background-color-button" id="BackgroundColorButton5"
+
+						 onclick="composeExtraFormat.setColor(this, event, '');"
+						 tooltiptext="&BackgroundColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+					<box class="color-button text-color-button" id="TextColorButton5"
+						 onclick="composeExtraFormat.setColor(this, event, 'Text');"
+						 tooltiptext="&TextColorButton.tooltip;"
+						 oncommand="/* See MsgComposeCommands.js::updateAllItems for why this attribute is needed here. */">
+					</box>
+				</stack>
+			</toolbaritem>
+
+			<toolbarbutton id="HighlightColorButton"
+						class="formatting-button"
+						tooltiptext="&HighlightColorButton.tooltip;"
+						command="cmd_highlight">
+				<observes element="cmd_highlight" attribute="state"
+						onbroadcast="onHighlightColorChange()"/>
+				<observes element="cmd_highlight" attribute="collapsed"/>
+			</toolbarbutton>
+
+		</toolbarpalette>
+
+		<toolbar id="efb-extra-format" class="chromeclass-toolbar" mode="icons"
+				 iconsize="small" persist="collapsed" collapsed="true"
+				 context="toolbar-format-context-menu" customizable="true"
+				 toolbarname="&extra-format-toolbar.label;" defaultset="">
+		</toolbar>
+	</toolbox>
 
 </overlay>

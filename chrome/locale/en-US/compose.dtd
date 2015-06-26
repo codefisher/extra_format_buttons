@@ -1,3 +1,4 @@
+<!ENTITY font.size.label "Font Size">
 <!ENTITY font.size.tooltip "Choose Font Size">
 <!ENTITY strike.through.tooltip "Strikethrough">
 <!ENTITY sub.script.tooltip "Subscript">
@@ -11,3 +12,31 @@
 
 <!ENTITY formatcode.label "Format Code">
 <!ENTITY rewrap-text.label "Rewrap">
+
+<!ENTITY justify-text.label "Justify">
+<!ENTITY justify-text.tooltip "Align text along left and right margins">
+
+<!ENTITY left-align-text.label "Left Align">
+<!ENTITY left-align-text.tooltip "Align text along left margin">
+
+<!ENTITY center-align-text.label "Center">
+<!ENTITY center-align-text.tooltip "Align text centered">
+
+<!ENTITY right-align-text.label "Right Align">
+<!ENTITY right-align-text.tooltip "Align text along right margin">
+
+<!ENTITY paragraph.label "Paragraph">
+<!ENTITY font-face.label "Font Face">
+<!ENTITY colors.label "Colors">
+<!ENTITY decrease-font-size.label "Decrease Font Size">
+<!ENTITY increase-font-size.label "Increase Font Size">
+<!ENTITY bold.label "Bold">
+<!ENTITY italic.label "Italic">
+<!ENTITY underline.label "Underline">
+<!ENTITY ul.label "List">
+<!ENTITY ol.label "Ordered List">
+<!ENTITY outdent.label "Outdent">
+<!ENTITY indent.label "Indent">
+<!ENTITY align.label "Align">
+<!ENTITY insert.label "Insert">
+<!ENTITY smile.label "Smile">

@@ -1,3 +1,8 @@
+try {
+	var Cc = Components.classes;
+	var Ci = Components.interfaces;
+} catch(e) {}
+
 var composeExtraFormat = {
 	init: function() {
 		var commandManager = GetCurrentCommandManager();
@@ -5,6 +10,28 @@ var composeExtraFormat = {
 		commandManager.addCommandObserver(composeExtraFormat, "cmd_setDocumentModified");
 		commandManager.addCommandObserver(composeExtraFormat, "cmd_bold");
 		commandManager.addCommandObserver(composeExtraFormat, "obs_documentLocationChanged");
+
+		/* setup for the extra color buttons */
+		var prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService)
+			.getBranch("extensions.compose-font-size.colors.");
+		prefs.QueryInterface(Ci.nsIPrefBranch2);
+		var count = {};
+		var rows = prefs.getChildList("", count);
+		for(var i = 0; i < count.value; i++) {
+			var nodeId = rows[i];
+			var node = document.getElementById(nodeId);
+			if(node) {
+				node.style.backgroundColor = prefs.getCharPref(nodeId);
+			}
+		}
+		var colorWatcher = new ExtraFormatSettingWatcher("", function(subject, topic, data) {
+			nodeId = data.replace('extensions.compose-font-size.colors.', '')
+			var node = document.getElementById(nodeId);
+			if(node) {
+				node.style.backgroundColor = prefs.getCharPref(nodeId);
+			}
+		});
+		colorWatcher.startup();
 	},
 
 	observe: function(aSubject, aTopic, aData) {
@@ -105,7 +132,103 @@ var composeExtraFormat = {
 		var menubar = document.getElementById("mail-menubar");
 		for (var i = 0; i < menubar.childNodes.length; ++i)
 			menubar.childNodes[i].setAttribute("disabled", false);
+	},
+
+	setColorDoubleClick: function(item, event) {
+		var prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService)
+			.getBranch("extensions.compose-font-size.colors.");
+		var textColorId = item.getAttribute("textcolor");
+		EditorSetTextProperty("font", "color", prefs.getCharPref(textColorId));
+		goUpdateCommandState("cmd_fontColor");
+
+		var backgroundColorId = item.getAttribute("backgroundcolor");
+		var editor = GetCurrentEditor();
+		editor.setBackgroundColor(prefs.getCharPref(backgroundColorId));
+		goUpdateCommandState("cmd_backgroundColor");
+	},
+
+	setColor: function(item, event, colorType) {
+		if (item.hasAttribute('disabled') && item.getAttribute('disabled') == 'true') {
+			return;
+		}
+		var prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService)
+			.getBranch("extensions.compose-font-size.colors.");
+		var nodeId = item.id;
+		if(event.button == 0) {
+			if(colorType == 'Text') {
+				EditorSetTextProperty("font", "color", prefs.getCharPref(nodeId));
+				goUpdateCommandState("cmd_fontColor");
+			} else {
+				var editor = GetCurrentEditor();
+				editor.setBackgroundColor(prefs.getCharPref(nodeId));
+				goUpdateCommandState("cmd_backgroundColor");
+			}
+		} else if(event.button == 2) {
+			event.preventDefault();
+			event.stopPropagation();
+
+			gColorObj.Type = colorType;
+			gColorObj.NoDefault = false;
+			if(colorType == 'Text') {
+				gColorObj.TextColor = prefs.getCharPref(nodeId);
+				gColorObj.LastTextColor = prefs.getCharPref(nodeId);
+			} else {
+				/* to do, we really need to handel tables here */
+				gColorObj.Type = "TableOrCell";
+				gColorObj.BackgroundColor = prefs.getCharPref(nodeId);
+				gColorObj.LastBackgroundColor = prefs.getCharPref(nodeId);
+			}
+			window.openDialog("chrome://editor/content/EdColorPicker.xul", "_blank", "chrome,close,titlebar,modal", "", gColorObj);
+			if (gColorObj.Cancel) {
+				return;
+			}
+			if(colorType == 'Text') {
+				if (gColorObj.TextColor) {
+					EditorSetTextProperty("font", "color", gColorObj.TextColor);
+					prefs.setCharPref(nodeId, gColorObj.TextColor);
+				} else {
+					EditorRemoveTextProperty("font", "color");
+				}
+				goUpdateCommandState("cmd_fontColor");
+			} else {
+				if(gColorObj.BackgroundColor) {
+					var editor = GetCurrentEditor();
+					editor.beginTransaction();
+					//try {
+						editor.setBackgroundColor(gColorObj.BackgroundColor);
+						prefs.setCharPref(nodeId, gColorObj.BackgroundColor);
+						goUpdateCommandState("cmd_backgroundColor");
+					//} catch(e) {}
+					editor.endTransaction();
+				}
+			}
+		}
 	}
+};
+
+function ExtraFormatSettingWatcher(pref, func) {
+	this.prefs = Cc["@mozilla.org/preferences-service;1"]
+		.getService(Ci.nsIPrefService).getBranch(pref);
+	this.prefs.QueryInterface(Ci.nsIPrefBranch2);
+	this.pref = pref;
+	this.func = func;
+
+	this.startup = function() {
+		this.prefs.addObserver("", this, false);
+	};
+
+	this.shutdown = function() {
+		this.prefs.removeObserver("", this);
+	};
+
+	this.observe = function(subject, topic, data) {
+		if (topic != "nsPref:changed") {
+			return;
+		}
+		try {
+			this.func(subject, topic, data);
+		} catch(e) {} // button might not exist
+	};
 }
 
 window.addEventListener("load", composeExtraFormat.init, false);

@@ -1,46 +1,101 @@
 #efb-strikethroughButton {
- list-style-image:url(text-strikethrough.png) !important;
+    list-style-image: url(text-strikethrough.png) !important;
 }
 
 #efb-strikethroughButton[disabled="true"] {
- list-style-image:url(text-strikethrough-disabled.png) !important;
+    list-style-image: url(text-strikethrough-disabled.png) !important;
 }
 
 #efb-subscriptButton {
- list-style-image:url(text-subscript.png) !important;
-}
-
-#efb-rewrap-text {
- list-style-image:url(text-wrap.png) !important;
+    list-style-image: url(text-subscript.png) !important;
 }
 
 #efb-subscriptButton[disabled="true"] {
- list-style-image:url(text-subscript-disabled.png) !important;
+    list-style-image: url(text-subscript-disabled.png) !important;
 }
 
 #efb-superscriptButton {
- list-style-image:url(text-superscript.png) !important;
+    list-style-image: url(text-superscript.png) !important;
 }
 
 #efb-superscriptButton[disabled="true"] {
- list-style-image:url(text-superscript-disabled.png) !important;
+    list-style-image: url(text-superscript-disabled.png) !important;
 }
 
 #efb-formatcode {
- list-style-image:url(script.png) !important;
+    list-style-image: url(script.png) !important;
 }
 
 #efb-formatcode[disabled="true"] {
- list-style-image:url(script-disabled.png) !important;
+    list-style-image: url(script-disabled.png) !important;
+}
+
+#efb-rewrap-text {
+    list-style-image: url(text-wrap.png) !important;
 }
 
 #efb-rewrap-text[disabled="true"] {
- list-style-image:url(text-wrap-disabled.png) !important;
+    list-style-image: url(text-wrap-disabled.png) !important;
 }
 
 #efb-extra-format {
-  -moz-appearance: none;
-  color: WindowText;
-  margin-left: 3px;
-  margin-right: 3px;
+    -moz-appearance: none;
+    color: WindowText;
+    margin-left: 3px;
+    margin-right: 3px;
+}
+
+#efb-justify-text {
+    list-style-image: url(text-align-justify.png) !important;
+}
+
+#efb-justify-text[disabled="true"] {
+    list-style-image: url(text-align-justify-disabled.png) !important;
+}
+
+#efb-center-align-text {
+    list-style-image: url(text-align-center.png) !important;
+}
+
+#efb-center-align-text[disabled="true"] {
+    list-style-image: url(text-align-center-disabled.png) !important;
+}
+
+#efb-left-align-text {
+    list-style-image: url(text-align-left.png) !important;
+}
+
+#efb-left-align-text[disabled="true"] {
+    list-style-image: url(text-align-left-disabled.png) !important;
+}
+
+#efb-right-align-text {
+    list-style-image: url(text-align-right.png) !important;
+}
+
+#efb-right-align-text[disabled="true"] {
+    list-style-image: url(text-align-right-disabled.png) !important;
+}
+
+.background-color-button {
+    margin-top: 9px;
+    margin-bottom: 2px;
+    -moz-margin-start: 9px;
+    -moz-margin-end: 2px;
+}
+
+.text-color-button {
+    margin-top: 2px;
+    margin-bottom: 9px;
+    -moz-margin-start: 2px;
+    -moz-margin-end: 9px;
+}
+
+#HighlightColorButton {
+    list-style-image: url(highlight.png) !important;
+    -moz-image-region: rect(0px, 16px, 16px, 0px) !important;
+}
+
+#HighlightColorButton[disabled="true"] {
+    list-style-image: url(highlight-disabled.png) !important;
 }
