@@ -32,6 +32,46 @@ var composeExtraFormat = {
 			}
 		});
 		colorWatcher.startup();
+
+		/* change the HTML cmd_renderedHTMLEnabler to our own */
+		/* var commandTable = GetComposerCommandTable();
+		if (commandTable) {
+			//commandTable.unregisterCommand("cmd_renderedHTMLEnabler", nsDummyHTMLCommand);
+			//commandTable.registerCommand("cmd_renderedHTMLEnabler2", composeExtraFormat.nsDummyHTMLCommand);
+		}*/
+	},
+
+	nsDummyHTMLCommand: {
+		isCommandEnabled: function (aCommand, dummy) {
+			return (IsDocumentEditable() && IsEditingRenderedHTML());
+		},
+		getCommandStateParams: function (aCommand, aParams, aRefCon) {},
+		doCommandParams: function (aCommand, aParams, aRefCon) {},
+		doCommand: function (aCommand) {}
+	},
+
+	enablerChange: function() {
+		//goUpdateCommand("cmd_renderedHTMLEnabler2");
+		var node = document.getElementById('cmd_renderedHTMLEnabler2');
+		var enabler = document.getElementById('cmd_renderedHTMLEnabler');
+		if(!enabler.getAttribute('disabled') || composeExtraFormat.focusIsToolbar()) {
+			node.removeAttribute('disabled');
+		} else {
+			node.setAttribute('disabled', true);
+		}
+	},
+
+	focusIsToolbar: function() {
+		var node = document.commandDispatcher.focusedElement;
+		if(!node){
+			return false;
+		}
+		for(; node; node = node.parentNode) {
+			if(node.id && node.id == 'FormatToolbox') {
+				return true;
+			}
+		}
+		return false;
 	},
 
 	observe: function(aSubject, aTopic, aData) {
@@ -95,7 +135,7 @@ var composeExtraFormat = {
 	},
 
 	setTextSizeList: function(size){
-		sizeBox = document.getElementById('efb-FontSize');
+		var sizeBox = document.getElementById('efb-FontSize');
 		if(!sizeBox) {
 			return;
 		}
@@ -108,7 +148,7 @@ var composeExtraFormat = {
 		} catch(e) {}
 	},
 
-	SetTextSize: function(value, nofocus) {
+	SetTextSize: function(event, value, nofocus) {
 		if(nofocus == undefined) {
 			nofocus = false;
 		}
@@ -194,15 +234,36 @@ var composeExtraFormat = {
 				if(gColorObj.BackgroundColor) {
 					var editor = GetCurrentEditor();
 					editor.beginTransaction();
-					//try {
+					try {
 						editor.setBackgroundColor(gColorObj.BackgroundColor);
 						prefs.setCharPref(nodeId, gColorObj.BackgroundColor);
 						goUpdateCommandState("cmd_backgroundColor");
-					//} catch(e) {}
+					} catch(e) {}
 					editor.endTransaction();
 				}
 			}
 		}
+	},
+
+	highlight: function(event) {
+		var color = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch)
+			.getCharPref('extensions.compose-font-size.highlight');
+		EditorSetTextProperty("font", "bgcolor", color);
+	},
+
+	highlightPanelShowing: function(event) {
+		var color = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch)
+			.getCharPref('extensions.compose-font-size.highlight');
+		var colorpicker = document.getElementById('eft-hightlight-picker');
+		colorpicker.color = color;
+	},
+
+	highlightCurrentColor: function(colorpicker, event) {
+		var color = colorpicker.color;
+		Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch)
+			.setCharPref('extensions.compose-font-size.highlight', color);
+		EditorSetTextProperty("font", "bgcolor", color);
+		colorpicker.parentNode.parentNode.hidePopup();
 	}
 };
 

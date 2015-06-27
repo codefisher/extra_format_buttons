@@ -25,6 +25,9 @@
 <!ENTITY right-align-text.label "Right Align">
 <!ENTITY right-align-text.tooltip "Align text along right margin">
 
+<!ENTITY highlight-color.label "Highlight">
+<!ENTITY highlight-color.clear "Clear Highlight">
+
 <!ENTITY paragraph.label "Paragraph">
 <!ENTITY font-face.label "Font Face">
 <!ENTITY colors.label "Colors">

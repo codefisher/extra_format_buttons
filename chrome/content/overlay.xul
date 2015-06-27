@@ -14,6 +14,10 @@
 				 oncommand="CustomizeMailToolbar('FormatToolbox', 'toolbar-format-context-menu'); composeExtraFormat.enableMenuBar();"/>
 	</commandset>
 
+	<commandset id="composerMenuItems">
+		<command id="cmd_renderedHTMLEnabler2"/>
+	</commandset>
+
 	<hbox id="composeContentBox">
 		<popupset id="composeContentPopupSet">
 			<menupopup id="toolbar-format-context-menu"
@@ -54,16 +58,22 @@
 
 			<toolbaritem id="efb-FontSize-container"
 						 label="&font.size.label;"
-						 observes="cmd_renderedHTMLEnabler"
+						 observes="cmd_renderedHTMLEnabler2"
 						 class="formatting-button">
+				<box>
+					<observes element="cmd_renderedHTMLEnabler" attribute="disabled"
+							onbroadcast="composeExtraFormat.enablerChange();" />
+				</box>
 				<menulist editable="true" id="efb-FontSize"
-						  observes="cmd_renderedHTMLEnabler"
 						  tooltiptext="&font.size.tooltip;"
-						  onchange="composeExtraFormat.SetTextSize(this.value, true);"
-						  oninput="composeExtraFormat.SetTextSize(this.value, true);"
+						  oncommand=""
+						  onchange="composeExtraFormat.SetTextSize(event, this.value, true);"
+						  oninput="composeExtraFormat.SetTextSize(event, this.value, true);"
+						  onkeyup="composeExtraFormat.SetTextSize(event, this.value, true); if(event.keyCode != 13) this.focus();"
 						  class="toolbar-focustarget">
+					<observes element="efb-FontSize-container" attribute="disabled"/>
 					<menupopup
-							onclick="composeExtraFormat.SetTextSize(event.target.value, true);">
+							onclick="composeExtraFormat.SetTextSize(event, event.target.value, true);">
 						<menuitem label="8" value="8"/>
 						<menuitem label="9" value="9"/>
 						<menuitem label="10" value="10"/>
@@ -249,13 +259,21 @@
 				</stack>
 			</toolbaritem>
 
-			<toolbarbutton id="HighlightColorButton"
+			<toolbarbutton id="eft-highlight-color"
 						class="formatting-button"
+						type="menu-button"
+						onclick="composeExtraFormat.highlight(event);"
+						label="&highlight-color.label;"
 						tooltiptext="&HighlightColorButton.tooltip;"
-						command="cmd_highlight">
-				<observes element="cmd_highlight" attribute="state"
-						onbroadcast="onHighlightColorChange()"/>
-				<observes element="cmd_highlight" attribute="collapsed"/>
+						observes="cmd_renderedHTMLEnabler">
+				<panel onpopupshowing="composeExtraFormat.highlightPanelShowing(event);">
+					<vbox>
+						<colorpicker id="eft-hightlight-picker"
+								onselect="composeExtraFormat.highlightCurrentColor(this, event);"/>
+						<menuitem label="&highlight-color.clear;"
+								  oncommand="EditorRemoveTextProperty('font', 'bgcolor');" />
+					</vbox>
+				</panel>
 			</toolbarbutton>
 
 		</toolbarpalette>

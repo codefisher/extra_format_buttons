@@ -14,3 +14,5 @@ pref("extensions.compose-font-size.colors.TextColorButton4", "#006600");
 
 pref("extensions.compose-font-size.colors.BackgroundColorButton5", "#CC66FF");
 pref("extensions.compose-font-size.colors.TextColorButton5", "#330033");
+
+pref("extensions.compose-font-size.highlight", "#FFFF00");

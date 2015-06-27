@@ -1,3 +1,8 @@
+#efb-FontSize-container menuitem .menu-iconic-left {
+    display:none !important;
+    max-width: 0 !important;
+}
+
 #efb-strikethroughButton {
     list-style-image: url(text-strikethrough.png) !important;
 }
@@ -91,11 +96,11 @@
     -moz-margin-end: 9px;
 }
 
-#HighlightColorButton {
+#eft-highlight-color {
     list-style-image: url(highlight.png) !important;
     -moz-image-region: rect(0px, 16px, 16px, 0px) !important;
 }
 
-#HighlightColorButton[disabled="true"] {
+#eft-highlight-color[disabled="true"] {
     list-style-image: url(highlight-disabled.png) !important;
 }
