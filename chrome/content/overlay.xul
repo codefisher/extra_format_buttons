@@ -262,16 +262,17 @@
 			<toolbarbutton id="eft-highlight-color"
 						class="formatting-button"
 						type="menu-button"
-						onclick="composeExtraFormat.highlight(event);"
+						oncommand="composeExtraFormat.highlight(event);"
 						label="&highlight-color.label;"
 						tooltiptext="&HighlightColorButton.tooltip;"
 						observes="cmd_renderedHTMLEnabler">
-				<panel onpopupshowing="composeExtraFormat.highlightPanelShowing(event);">
+				<panel onpopupshowing="composeExtraFormat.highlightPanelShowing(event);"
+						oncommand="event.stopPropagation();">
 					<vbox>
 						<colorpicker id="eft-hightlight-picker"
 								onselect="composeExtraFormat.highlightCurrentColor(this, event);"/>
 						<menuitem label="&highlight-color.clear;"
-								  oncommand="EditorRemoveTextProperty('font', 'bgcolor');" />
+								  oncommand="composeExtraFormat.removeHighlight(this, event);" />
 					</vbox>
 				</panel>
 			</toolbarbutton>

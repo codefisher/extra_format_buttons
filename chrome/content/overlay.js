@@ -25,7 +25,7 @@ var composeExtraFormat = {
 			}
 		}
 		var colorWatcher = new ExtraFormatSettingWatcher("", function(subject, topic, data) {
-			nodeId = data.replace('extensions.compose-font-size.colors.', '')
+			var nodeId = data.replace('extensions.compose-font-size.colors.', '')
 			var node = document.getElementById(nodeId);
 			if(node) {
 				node.style.backgroundColor = prefs.getCharPref(nodeId);
@@ -252,10 +252,10 @@ var composeExtraFormat = {
 	},
 
 	highlightPanelShowing: function(event) {
-		var color = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch)
+		/*var color = Cc['@mozilla.org/preferences-service;1'].getService(Ci.nsIPrefBranch)
 			.getCharPref('extensions.compose-font-size.highlight');
 		var colorpicker = document.getElementById('eft-hightlight-picker');
-		colorpicker.color = color;
+		colorpicker.color = color;*/
 	},
 
 	highlightCurrentColor: function(colorpicker, event) {
@@ -264,6 +264,16 @@ var composeExtraFormat = {
 			.setCharPref('extensions.compose-font-size.highlight', color);
 		EditorSetTextProperty("font", "bgcolor", color);
 		colorpicker.parentNode.parentNode.hidePopup();
+	},
+
+	removeHighlight: function(item, event) {
+		/*var editor = document.getElementById("content-frame");
+		var htmlEditor = editor.getHTMLEditor(editor.contentWindow);
+		alert(htmlEditor.getSelectionContainer());
+		var mix = {value: false};
+		alert(htmlEditor.getHighlightColorState(mix));*/
+		EditorSetTextProperty("font", "bgcolor", "transparent");
+		EditorRemoveTextProperty('font', 'bgcolor');
 	}
 };
 
